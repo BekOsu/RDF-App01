@@ -8,9 +8,23 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
-class ItemSerializer(serializers.ModelSerializer):
+class WriteItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = ['item_name', 'price', 'on_discount', 'discount_price', 'category', 'stock', 'description']
+
+
+class ReadItemSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
 
     class Meta:
         model = Item
         fields = ['id', 'item_name', 'price', 'on_discount', 'discount_price', 'category', 'stock', 'description']
+        read_only_fields = fields
+
+# class ItemSerializer(serializers.ModelSerializer):
+#     category = CategorySerializer()
+#
+#     class Meta:
+#         model = Item
+#         fields = ['id', 'item_name', 'price', 'on_discount', 'discount_price', 'category', 'stock', 'description']
