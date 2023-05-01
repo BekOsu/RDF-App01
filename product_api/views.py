@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from .models import Category, Item
-from .serializers import CategorySerializer, ItemSerializer
+from .serializers import CategorySerializer, ReadItemSerializer, WriteItemSerializer
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -15,5 +15,7 @@ class ItemViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows items to be viewed or edited.
     """
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
+    def get_serializer_class(self):
+        if self.action in ("list", "retrieve"):
+            return ReadItemSerializer
+        return WriteItemSerializer
