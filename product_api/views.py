@@ -15,6 +15,8 @@ class ItemViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows items to be viewed or edited.
     """
+    queryset = Item.objects.select_related("category")
+
     def get_serializer_class(self):
         if self.action in ("list", "retrieve"):
             return ReadItemSerializer
