@@ -22,9 +22,3 @@ class ReadItemSerializer(serializers.ModelSerializer):
         fields = ['id', 'item_name', 'price', 'on_discount', 'discount_price', 'category', 'stock', 'description']
         read_only_fields = fields
 
-# class ItemSerializer(serializers.ModelSerializer):
-#     category = CategorySerializer()
-#
-#     class Meta:
-#         model = Item
-#         fields = ['id', 'item_name', 'price', 'on_discount', 'discount_price', 'category', 'stock', 'description']
