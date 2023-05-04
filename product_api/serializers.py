@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Item
+from .models import Category, Item, OrderItem, Order
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -8,17 +8,22 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
-class WriteItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Item
-        fields = ['item_name', 'price', 'on_discount', 'discount_price', 'category', 'stock', 'description']
-
-
-class ReadItemSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
-
+class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ['id', 'item_name', 'price', 'on_discount', 'discount_price', 'category', 'stock', 'description']
-        read_only_fields = fields
 
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    item = serializers.ReadOnlyField(source='item.name')
+
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
