@@ -4,6 +4,8 @@ from .models import Category, Item, OrderItem, Order
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.contrib import messages
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from .serializers import (
     CategorySerializer, ItemSerializer, OrderItemSerializer, OrderSerializer
 )
