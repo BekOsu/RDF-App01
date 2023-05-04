@@ -15,15 +15,16 @@ class ItemSerializer(serializers.ModelSerializer):
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
-    item = serializers.ReadOnlyField(source='item.name')
-
     class Meta:
         model = OrderItem
-        fields = '__all__'
+        fields = ['id']
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    ordered_date = serializers.ReadOnlyField(source='item.ordered_date')
+    quantity = serializers.ReadOnlyField(source='item.quantity')
+
     class Meta:
         model = Order
         fields = '__all__'

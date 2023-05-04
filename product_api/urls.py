@@ -3,7 +3,8 @@ from rest_framework import routers
 from .views import (
     CategoryViewSet,
     ItemViewSet,
-    AddToCartView,
+    CartView,
+    # ReduceCartView,
 )
 
 router = routers.DefaultRouter()
@@ -12,6 +13,7 @@ router.register(r'product', ItemViewSet, basename="product")
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('add-to-cart/<int:pk>/', AddToCartView.as_view(), name='add-to-cart'),
+    path('cart-view/<int:pk>/', CartView.as_view(), name='cart-view'),
+    # path('reduce-cart/<int:pk>/', ReduceCartView.as_view(), name='reduce-cartw'),
 
 ]
